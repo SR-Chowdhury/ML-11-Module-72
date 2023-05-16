@@ -22,6 +22,6 @@
     margin: 12px 0px;
 }
 
-.paginationBtn {
-    
+.paginationSelected {
+    background-color: #FF9900;
 }

@@ -9,16 +9,20 @@ import { Link, useLoaderData } from 'react-router-dom';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+
     const { totalProducts } = useLoaderData();
-    const itemsPerPage = 10; // TODO: make it dynamic
     const totalPages = Math.ceil(totalProducts / itemsPerPage);
     // console.log('totalpages: ', totalPages);
     const pageNumbers = [...Array(totalPages).keys()];
 
+    const options = [5, 10, 20];
+
 
     /**
      * Step 1: Determine the total numbers of item
-     * step 2: Decide on the number of page per item [TODO]
+     * step 2: Decide on the number of page per item
      * step 3: Calculate the total number of pages
      */
 
@@ -71,6 +75,12 @@ const Shop = () => {
         clearLocalStorage();
     }
 
+    const handleSelectChange = event => {
+        // console.log(typeof event.target.value)
+        setItemsPerPage(parseInt(event.target.value));
+        setCurrentPage(0);
+    }
+
     return (
         <div>
             <div className='shopContainer'>
@@ -94,9 +104,30 @@ const Shop = () => {
                 </div>
             </div>
             <div className='paginationContainer'>
+                <span>Current page : {currentPage} of {totalPages - 1} [Items / page: {itemsPerPage}] &nbsp; Filter: </span>
+                <select onChange={handleSelectChange}>
+                    {
+                        options.map(option =>
+                            <option 
+                            key={option} 
+                            value={option}
+                            >
+                                {option}
+                            </option>)
+                    }
+                </select><br />
+
                 {
-                    pageNumbers.map(number => <button className='paginationBtn btn btn-outline-warning border-0 text-lg' key={number}>{number}</button>)
+                    pageNumbers.map(number =>
+                        <button
+                            className={currentPage === number ? 'paginationSelected btn btn-outline-warning border-0 text-lg text-white' : 'btn btn-outline-warning border-0 text-lg'}
+                            key={number}
+                            onClick={() => setCurrentPage(number)}
+                        >
+                            {number}
+                        </button>)
                 }
+
             </div>
         </div>
     );
