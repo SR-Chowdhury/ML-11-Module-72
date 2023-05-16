@@ -1,0 +1,58 @@
+.reviewItemContainer {
+    margin-bottom: 24px;
+    border: 1px solid #95A0A7;
+    border-radius: 8px;
+    padding: 8px 24px 8px 8px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.itemImg img {
+    height: 91px;
+    width: 91px;
+    border-radius: 6px;
+}
+
+.itemInfo {
+    flex-grow: 1;
+}
+
+.itemInfo h1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    letter-spacing: 0.0015em;
+    color: #1C2B35;
+}
+
+.itemInfo h2 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.0025em;
+    color: #1C2B35;
+}
+
+.itemInfo span {
+    color: #FF9900;
+}
+
+.deleteItemBtn {
+    background: rgba(235, 87, 87, 0.3);
+    height: 55px;
+    width: 55px;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trashIcon {
+    color: #EB5757;
+    font-size: 27.5px;
+
+}

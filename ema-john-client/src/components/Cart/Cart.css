@@ -1,0 +1,49 @@
+.cart-summary-heading {
+    color: #1C2B35;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    margin: 28px 0px 25px 0px;
+}
+
+.cart-info {
+    padding: 24px;
+}
+
+.cart-info h3 {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    color: #2A414F;
+}
+
+.cart-info h2 {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    letter-spacing: 0.0015em;
+    color: #0E161A;
+}
+
+.clear-cart-btn,
+.review-cart-btn {
+    border-radius: 4px;
+    letter-spacing: 0.005em;
+    border: 0;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    width: 100%;
+    padding: 14px 0px;
+}
+
+.clear-cart-btn {
+    background: #FF3030;
+    margin: 50px 0px 30px 0px;
+}
+
+.review-cart-btn {
+    background: #FF9900;
+}

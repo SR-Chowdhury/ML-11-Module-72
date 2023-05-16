@@ -1,0 +1,15 @@
+nav {
+    background: #1C2B35;
+}
+
+.navbar-nav-Ema-john {
+    gap: 32px;
+}
+
+.nav-item .nav-link{
+    color: #FFFFFF;
+}
+
+.nav-link:hover {
+    color: #FF9900;
+}

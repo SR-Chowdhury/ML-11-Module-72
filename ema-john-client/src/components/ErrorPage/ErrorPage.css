@@ -1,0 +1,8 @@
+.errorContainer {
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    text-align: center;
+}
