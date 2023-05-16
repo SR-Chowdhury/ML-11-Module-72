@@ -24,15 +24,26 @@ const Shop = () => {
      * Step 1: Determine the total numbers of item
      * step 2: Decide on the number of page per item
      * step 3: Calculate the total number of pages
+     * step 4: Determine the current page
+     * step 5: 
      */
 
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/products')
+    //         .then(res => res.json())
+    //         .then(data => setProducts(data))
+    //         .catch(err => console.log(err))
+    // }
+    //     , []);
+
+    
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch(`http://localhost:5000/products?page=${currentPage}&&limit=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setProducts(data))
             .catch(err => console.log(err))
     }
-        , []);
+        , [currentPage, itemsPerPage]);
 
     useEffect(() => {
         // console.log(products);

@@ -40,6 +40,7 @@ async function run() {
         });
 
         app.get('/products', async (req, res) => {
+            console.log(req.query)
             const result = await productsCollection.find().toArray();
             res.send(result);
         });
