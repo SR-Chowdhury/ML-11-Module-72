@@ -9,8 +9,18 @@ import { Link, useLoaderData } from 'react-router-dom';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
-    const {totalProducts} = useLoaderData();
-    console.log(totalProducts);
+    const { totalProducts } = useLoaderData();
+    const itemsPerPage = 10; // TODO: make it dynamic
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
+    // console.log('totalpages: ', totalPages);
+    const pageNumbers = [...Array(totalPages).keys()];
+
+
+    /**
+     * Step 1: Determine the total numbers of item
+     * step 2: Decide on the number of page per item [TODO]
+     * step 3: Calculate the total number of pages
+     */
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
@@ -62,24 +72,31 @@ const Shop = () => {
     }
 
     return (
-        <div className='shopContainer'>
-            <div className="productsContainer">
-                {
-                    products.map(product => <Product
-                        key={product._id}
-                        product={product}
-                        handleAddToCart={handleAddToCart}
-                    />)
-                }
+        <div>
+            <div className='shopContainer'>
+                <div className="productsContainer">
+                    {
+                        products.map(product => <Product
+                            key={product._id}
+                            product={product}
+                            handleAddToCart={handleAddToCart}
+                        />)
+                    }
+                </div>
+                <div className="cartContainer">
+                    <Cart cart={cart} handleClearCart={handleClearCart}>
+                        <Link to={'/orders'}>
+                            <div>
+                                <button className='review-cart-btn'>Review Order</button>
+                            </div>
+                        </Link>
+                    </Cart>
+                </div>
             </div>
-            <div className="cartContainer">
-                <Cart cart={cart} handleClearCart={handleClearCart}>
-                    <Link to={'/orders'}>
-                        <div>
-                            <button className='review-cart-btn'>Review Order</button>
-                        </div>
-                    </Link>
-                </Cart>
+            <div className='paginationContainer'>
+                {
+                    pageNumbers.map(number => <button className='paginationBtn btn btn-outline-warning border-0 text-lg' key={number}>{number}</button>)
+                }
             </div>
         </div>
     );
