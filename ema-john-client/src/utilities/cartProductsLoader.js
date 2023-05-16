@@ -2,12 +2,23 @@ import { getShoppingCart } from "./addToLocalStorage";
 
 const cartProductsLoader = async () => {
 
-    // Step 1: Fetch API data
-    const loadedProducts = await fetch('http://localhost:5000/products');
+    // [updated] Step 1: Fetch data from Local Storage 
+    const localCart = getShoppingCart();
+    // console.log('localCart: ', Object.keys(localCart));
+
+    // [updated] Step 2: Fetch API data
+    const loadedProducts = await fetch('http://localhost:5000/productsByIds', {
+        method: 'POST',
+        headers: {
+            'content-type' : 'application/json',
+        },
+        body: JSON.stringify(Object.keys(localCart))
+    });
+    // console.log('loaded products: ', loadedProducts);
+
     const products = await loadedProducts.json();
 
-    // Step 2: Fetch data from Local Storage 
-    const localCart = getShoppingCart();
+    console.log('products on client', products);
 
     const savedCart = [];
 

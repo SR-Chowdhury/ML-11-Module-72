@@ -116,7 +116,7 @@ const Shop = () => {
             </div>
             <div className='paginationContainer'>
                 <span>Current page : {currentPage} of {totalPages - 1} [Items / page: {itemsPerPage}] &nbsp; Filter: </span>
-                <select onChange={handleSelectChange}>
+                <select value={itemsPerPage} onChange={handleSelectChange}>
                     {
                         options.map(option =>
                             <option 
