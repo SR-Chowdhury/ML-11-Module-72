@@ -13,7 +13,7 @@ const Orders = () => {
 
     const handleRemoveItem = (id) => {
         // console.log(id);
-        const remainingItem = cart.filter(item => item.id !== id);
+        const remainingItem = cart.filter(item => item._id !== id);
         setCart(remainingItem);
         removeItemFromLocalStorage(id);
     }
@@ -28,7 +28,7 @@ const Orders = () => {
             <div className="reviewContainer">
                 {
                     cart.map(item => <ReviewItem
-                        key={item.id}
+                        key={item._id}
                         item={item}
                         handleRemoveItem={handleRemoveItem}
                         handleClearCart={handleClearCart} />)

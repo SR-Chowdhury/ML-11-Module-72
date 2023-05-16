@@ -15,7 +15,7 @@ const ReviewItem = ({ item, handleRemoveItem }) => {
                 <h2>Shipping Charge: <span>${item.shipping}</span></h2>
                 <h2>Item Quantity: <span>{item.quantity > 1 ? item.quantity+' pices': item.quantity+' pice'}</span></h2>
             </div>
-            <button onClick={() => handleRemoveItem(item.id)} className='deleteItemBtn'>
+            <button onClick={() => handleRemoveItem(item._id)} className='deleteItemBtn'>
                 <FontAwesomeIcon className='trashIcon' icon={faTrashAlt} />
             </button>
         </div>

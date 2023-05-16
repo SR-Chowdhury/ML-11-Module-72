@@ -3,7 +3,7 @@ import { getShoppingCart } from "./addToLocalStorage";
 const cartProductsLoader = async () => {
 
     // Step 1: Fetch API data
-    const loadedProducts = await fetch('../../public/products.json');
+    const loadedProducts = await fetch('http://localhost:5000/products');
     const products = await loadedProducts.json();
 
     // Step 2: Fetch data from Local Storage 
@@ -15,7 +15,7 @@ const cartProductsLoader = async () => {
     for (const id in localCart) {
 
         // Step 2-2: Find particular product from products [] / state using localCart's id
-        const addedProduct = products.find(product => product.id === id);
+        const addedProduct = products.find(product => product._id === id);
 
         // Step 2-3: Set quantity to the addedProduct []
         if (addedProduct) {
