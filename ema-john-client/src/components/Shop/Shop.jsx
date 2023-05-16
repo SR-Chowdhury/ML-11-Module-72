@@ -36,7 +36,7 @@ const Shop = () => {
     // }
     //     , []);
 
-    
+
     useEffect(() => {
         fetch(`http://localhost:5000/products?page=${currentPage}&&limit=${itemsPerPage}`)
             .then(res => res.json())
@@ -48,32 +48,45 @@ const Shop = () => {
     useEffect(() => {
         // console.log(products);
         const localCart = getShoppingCart();
-        // console.log(localCart);
-        const savedCart = [];
+        const ids = Object.keys(localCart);
 
-        // Step 1: Find the id form local Storage
-        for (const id in localCart) {
-            // Step 2: Find particular product from products [] / state using id
-            const addedProduct = products.find(product => product._id === id);
+        fetch('http://localhost:5000/productsByIds', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(ids)
+        })
+            .then(res => res.json())
+            .then(cartProducts => {
+                // console.log('Cart products ',cartProducts)
+                const savedCart = [];
 
-            // Step 3: Set quantity to the addedProduct []
-            if (addedProduct) {
-                const quantity = localCart[id];
-                addedProduct.quantity = quantity;
+                // Step 1: Find the id form local Storage
+                for (const id in localCart) {
+                    // Step 2: Find particular product from products [] / state using id
+                    const addedProduct = cartProducts.find(product => product._id === id);
 
-                // Step 4: add the addedProduct to our savedCart Array
-                savedCart.push(addedProduct);
-            }
+                    // Step 3: Set quantity to the addedProduct []
+                    if (addedProduct) {
+                        const quantity = localCart[id];
+                        addedProduct.quantity = quantity;
 
-            // Step 5: Finally, Change the cart state 
-            setCart(savedCart);
+                        // Step 4: add the addedProduct to our savedCart Array
+                        savedCart.push(addedProduct);
+                    }
 
-            // console.log('added product, ', addedProduct);
+                    // Step 5: Finally, Change the cart state 
+                    setCart(savedCart);
 
-        }
+                    // console.log('added product, ', addedProduct);
+                }
+
+            })
+            .catch(err => console.log(err.message))
 
     }
-        , [products]);
+        , []);
 
     const handleAddToCart = (product) => {
         const newCart = [...cart, product];
@@ -115,13 +128,13 @@ const Shop = () => {
                 </div>
             </div>
             <div className='paginationContainer'>
-                <span>Current page : {currentPage} of {totalPages - 1} [Items / page: {itemsPerPage}] &nbsp; Filter: </span>
+                <span>Current page : {currentPage+1} of {totalPages} [Items / page: {itemsPerPage}] &nbsp; Filter: </span>
                 <select value={itemsPerPage} onChange={handleSelectChange}>
                     {
                         options.map(option =>
-                            <option 
-                            key={option} 
-                            value={option}
+                            <option
+                                key={option}
+                                value={option}
                             >
                                 {option}
                             </option>)
@@ -135,7 +148,7 @@ const Shop = () => {
                             key={number}
                             onClick={() => setCurrentPage(number)}
                         >
-                            {number}
+                            {number+1}
                         </button>)
                 }
 
